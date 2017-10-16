@@ -1,7 +1,9 @@
-## Put comments here that give an overall description of what your
-## functions do
+## The goal of this assignment is to write two functions, one
+##which makes a matrix (makeCacheMatrix) and another
+##which solves for the inverse of the matrix
 
-## This function creates a cache Matrix
+## This is the first function which creates the matrix
+##object that can be cached for inverse
 
 makeCacheMatrix <- function(x = matrix()) {
         inv <- NULL
@@ -9,10 +11,10 @@ makeCacheMatrix <- function(x = matrix()) {
                 x <<- y
                 inv <<- NULL
         } #args(set)
-        get <- function() {
+        get <- function() x {
                 x
         }
-        setinverse <- function() inv <<- solve(x) #calculate inverse
+        setinverse <- function(inverse) inv <<- solve(x) #calculate inverse
         getinverse <- function() inv
         list(set = set, get = get,
              setinverse = setinverse,
@@ -20,8 +22,10 @@ makeCacheMatrix <- function(x = matrix()) {
 }
 
 
-## cacheSolves checks cache for existing result and calculates inverse of x
-
+## cacheSolves is the function which computes the inverse
+##of the matrix returned by makeCacheMatrix. If the inverse
+##has already been calculated then the cachSolve retrieves
+##the inverse from the cache, rather than regenerating
 cacheSolve <- function(x, ...) {
         ## Return a matrix that is the inverse of 'x'
         inv <- x$getinverse()
